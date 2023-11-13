@@ -1,75 +1,76 @@
-public class CobaMerge {
+public class MergeSort {
 
 
     // Merges two subarrays of arr[].
     // First subarray is arr[l..m]
     // Second subarray is arr[m+1..r]
-    void merge(int[] arr, int kiri, int tengah, int kanan)
+    void merge(int arr[], int l, int m, int r)
     {
-
         // Find sizes of two subarrays to be merged
-        int nilai1 = tengah - kiri + 1;
-        int nilai2 = kanan - tengah;
+        int n1 = m - l + 1;
+        int n2 = r - m;
 
         // Create temp arrays
-        int[] arrayKiri = new int[nilai1];
-        int[] arrayKanan = new int[nilai2];
+        int L[] = new int[n1];
+        int R[] = new int[n2];
 
         // Copy data to temp arrays
-        for (int i = 0; i < nilai1; i++)
-            arrayKiri[i] = arr[kiri + i];
-        for (int j = 0; j < nilai2; j++)
-            arrayKanan[j] = arr[tengah + 1 + j];
+        for (int i = 0; i < n1; ++i){
+            L[i] = arr[l + i];
+        }
 
+        for (int j = 0; j < n2; ++j){
+            R[j] = arr[m + 1 + j];
+        }
         // Merge the temp arrays
 
         // Initial indices of first and second subarrays
-        int i = 0, j = 0;
+        int i = 0;
+        int j = 0;
 
         // Initial index of merged subarray array
-        int k = kiri;
-        while (i < nilai1 && j < nilai2) {
-            if (arrayKiri[i] <= arrayKanan[j]) {
-                arr[k] = arrayKiri[i];
+        int k = l;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k] = L[i];
                 i++;
             }
             else {
-                arr[k] = arrayKanan[j];
+                arr[k] = R[j];
                 j++;
             }
             k++;
         }
 
         // Copy remaining elements of L[] if any
-        while (i < nilai1) {
-            arr[k] = arrayKiri[i];
+        while (i < n1) {
+            arr[k] = L[i];
             i++;
             k++;
         }
 
         // Copy remaining elements of R[] if any
-        while (j < nilai2) {
-            arr[k] = arrayKanan[j];
+        while (j < n2) {
+            arr[k] = R[j];
             j++;
             k++;
         }
     }
 
-    // Main function that sorts arr[kiri..kanan] using
+    // Main function that sorts arr[l..r] using
     // merge()
-    void sort(int[] arr, int kiri, int kanan)
+    void sort(int[] arr, int l, int r)
     {
-        if (kiri < kanan) {
-
+        if (l < r) {
             // Find the middle point
-            int tengah = kiri + (kanan - kiri) / 2;
+            int m = l + (r - l) / 2;
 
             // Sort first and second halves
-            sort(arr, kiri, tengah);
-            sort(arr, tengah + 1, kanan);
+//            sort(arr, kiri, tengah);
+//            sort(arr, tengah + 1, kanan);
 
             // Merge the sorted halves
-            merge(arr, kiri, tengah, kanan);
+            merge(arr, l, m, r);
         }
     }
 
@@ -77,8 +78,9 @@ public class CobaMerge {
     static void printArray(int[] arr)
     {
         int n = arr.length;
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < n; ++i){
             System.out.print(arr[i] + " ");
+        }
         System.out.println();
     }
 
@@ -88,7 +90,7 @@ public class CobaMerge {
         System.out.println("Given array is");
         printArray(arr);
 
-        CobaMerge ob = new CobaMerge();
+        MergeSort ob = new MergeSort();
         ob.sort(arr, 0, arr.length - 1);
 
         System.out.println("\nSorted array is");

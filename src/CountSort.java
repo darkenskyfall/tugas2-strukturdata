@@ -1,5 +1,6 @@
-public class CobaCounting {
-    void countSort(int array[], int size) {
+public class CountSort {
+    void countSort(int[] array, int size) {
+
         int[] output = new int[size + 1];
 
         // Find the largest element of the array
@@ -17,7 +18,7 @@ public class CobaCounting {
         }
 
         // Store the count of each element
-        for (int i = 0; i < size; i++) {]
+        for (int i = 0; i < size; i++) {
             count[array[i]]++;
         }
 
@@ -42,15 +43,16 @@ public class CobaCounting {
     static void printArray(int[] arr)
     {
         int n = arr.length;
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < n; ++i){
             System.out.print(arr[i] + " ");
+        }
         System.out.println();
     }
 
     public static void onStart(){
         int[] data = { 4, 2, 2, 8, 3, 3, 1 };
         int size = data.length;
-        CobaCounting cs = new CobaCounting();
+        CountSort cs = new CountSort();
         cs.countSort(data, size);
         System.out.println("Sorted Array in Ascending Order: ");
         printArray(data);
